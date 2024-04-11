@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { Container } from '@componets/Container'
+import { Header } from '@componets/Header'
+import { SaleOrder } from '@screens/sale-order/SaleOrder'
+import { SalesHistory } from '@screens/sales-history/SalesHistory'
+import { MainProvider } from '@context/MainContext'
+import { useEffect } from 'react'
+import { createDataBase } from 'services/dataBase'
 
 export default function App() {
+    useEffect(() => (createDataBase()), [])
+
     return (
-        <View style={styles.container}>
-            <Text>Open up App.tsx to start working on your app!</Text>
-            <StatusBar style="auto" />
-        </View>
+        <MainProvider>
+            <Container>
+                <Header />
+                <SaleOrder />
+                <SalesHistory />
+            </Container>
+        </MainProvider>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
