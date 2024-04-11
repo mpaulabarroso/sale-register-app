@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { MainContext, TABS } from '@context/MainContext'
+import { MainContext, MainProvider, TABS } from '@context/MainContext'
 import { Separator } from '@componets/Separator'
 import { Categories } from './components/Categories'
 import { Payment } from './components/Payment'
@@ -7,8 +7,11 @@ import { SalesContextProvider } from './context/SalesContext'
 import { SaleItemList } from './components/SaleItemList'
 import { ContentView } from '@componets/ContentView'
 import { SaleMainButton } from './components/SaleMainButton'
+import { Container } from '@componets/Container'
+import { Header } from '@componets/Header'
+import { SalesHistory } from '@screens/sales-history/SalesHistory'
 
-export function SaleOrder() {
+function SaleOrderTab() {
     const { tab } = useContext(MainContext)
 
     if (tab !== TABS[0]) return null
@@ -23,5 +26,18 @@ export function SaleOrder() {
                 <SaleMainButton />
             </ContentView>
         </SalesContextProvider>
+    )
+}
+
+export function SaleOrder() {
+
+    return (
+        <MainProvider>
+            <Container>
+                <Header />
+                <SaleOrderTab />
+                <SalesHistory />
+            </Container>
+        </MainProvider>
     )
 }
