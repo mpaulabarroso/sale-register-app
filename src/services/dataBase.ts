@@ -1,4 +1,5 @@
-import { SaleType, SetHistoryType } from '@screens/sales-history/context/HistoryContext'
+
+import { SaleType, SetHistoryType } from '@screens/sales-history/SalesHistory'
 import * as SQLite from 'expo-sqlite'
 import { Platform } from 'react-native'
 
