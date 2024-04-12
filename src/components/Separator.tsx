@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         fontWeight: '500',
         textAlignVertical: 'center',
-        marginHorizontal: 16,
-        paddingVertical: 4,
+        marginHorizontal: 0,
+        paddingVertical: 8,
     }
 })

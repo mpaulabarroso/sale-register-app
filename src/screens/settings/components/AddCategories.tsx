@@ -1,20 +1,21 @@
 import { Button } from '@componets/Button'
-import { Separator } from '@componets/Separator'
 import { TextInput, View } from 'react-native'
-import { styles } from '../utils/buttonStylesSettings'
+import { styles } from '../utils/settingsStyles'
+import { Separator } from '@componets/Separator'
 
 export function AddCategories() {
     return (
-        <View>
-            <Separator title='Agregar categorias' />
-            <View style={styles.contAdd}>
+        <View style={styles.container}>
+            <Separator title='Categorías' />
+            <View style={styles.contRow}>
                 <TextInput
                     style={styles.input}
                     onChangeText={() => { }}
+                    placeholder='Nueva categoría...'
                 />
                 <Button
-                    styleButton={[styles.button]}
-                    styleText={[styles.text]}
+                    styleButton={[styles.buttonCont]}
+                    styleText={[styles.buttonText]}
                     onPress={() => { }}
                     content='Agregar'
                 />
