@@ -1,8 +1,8 @@
 import { Text, TouchableOpacity, TextStyle, ViewStyle } from 'react-native'
 
 interface ButtonProps {
-    styleButton: ViewStyle[]
-    styleText: TextStyle[]
+    styleButton: ViewStyle[] | ViewStyle
+    styleText: TextStyle[] | TextStyle
     onPress: () => void
     content: string
 }

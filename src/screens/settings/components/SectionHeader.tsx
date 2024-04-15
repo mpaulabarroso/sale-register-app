@@ -8,7 +8,7 @@ export function SectionHeader() {
     const { title, show, setShow } = useContext(SectionContext)
 
     return (
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+        <View style={styles.contRow}>
             <Separator title={title} />
             <TouchableOpacity
                 style={styles.desplegable}

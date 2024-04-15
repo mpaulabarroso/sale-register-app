@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { View } from 'react-native'
-import { styles } from '../utils/settingsStyles'
 import { SectionHeader } from './SectionHeader'
 import { SectionContent } from './SectionContent'
-import { SectionContext, SectionProps } from '../context/SectionContext'
+import { Item, SectionContext, SectionProps } from '../context/SectionContext'
 
 export function Section({ title, placeholder, endpoint }: SectionProps) {
     const [show, setShow] = useState(false)
+    const [items, setItems] = useState<Item[]>([])
 
     return (
         <SectionContext.Provider value={{
@@ -14,9 +14,11 @@ export function Section({ title, placeholder, endpoint }: SectionProps) {
             placeholder,
             endpoint,
             show,
-            setShow
+            setShow,
+            items,
+            setItems
         }}>
-            <View style={styles.container}>
+            <View style={{ margin: 4 }}>
                 <SectionHeader />
                 <SectionContent />
             </View>

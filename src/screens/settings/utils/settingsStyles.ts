@@ -2,9 +2,6 @@ import { theme } from '@utils/theme'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
-    container: {
-        padding: 8,
-    },
     buttonCont: {
         height: 30,
         paddingHorizontal: 16,
@@ -35,6 +32,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 4,
+        paddingHorizontal: 8,
     },
     syncContRow: {
         flexDirection: 'row',
@@ -47,7 +45,4 @@ export const styles = StyleSheet.create({
         width: 24,
         backgroundColor: 'pink',
     },
-    desplegablePress: {
-        backgroundColor: 'red',
-    }
 })
