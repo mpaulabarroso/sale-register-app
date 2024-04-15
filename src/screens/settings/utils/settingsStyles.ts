@@ -41,5 +41,13 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 8,
+    },
+    desplegable: {
+        height: 24,
+        width: 24,
+        backgroundColor: 'pink',
+    },
+    desplegablePress: {
+        backgroundColor: 'red',
     }
 })
