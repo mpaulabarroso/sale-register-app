@@ -6,13 +6,13 @@ export function Settings() {
     return (
         <ContentView>
             <Section
-                title='Categorias'
+                title='Categorías'
                 placeholder='Nueva Categoria...'
                 endpoint='/category'
             />
             <Section
                 title='Metodo de Pago'
-                placeholder='Nueva metodo de pago...'
+                placeholder='Nuevo metodo de pago...'
                 endpoint='/payment'
             />
             <SyncSales />

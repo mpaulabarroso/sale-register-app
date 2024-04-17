@@ -1,6 +1,5 @@
 import { useContext } from 'react'
-import { View, TouchableOpacity } from 'react-native'
-import { styles } from '../utils/settingsStyles'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Separator } from '@componets/Separator'
 import { SectionContext } from '../context/SectionContext'
 
@@ -17,3 +16,18 @@ export function SectionHeader() {
         </View>
     )
 }
+
+export const styles = StyleSheet.create({
+    contRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 4,
+        paddingHorizontal: 8,
+    },
+    desplegable: {
+        height: 24,
+        width: 24,
+        backgroundColor: 'pink',
+    },
+})
