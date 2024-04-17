@@ -1,8 +1,7 @@
-import { Button } from '@componets/Button'
 import { ItemsScroll } from '@componets/ItemsScroll'
-import { styles } from '../utils/buttonStyles'
 import { useContext } from 'react'
 import { SalesContext } from '../context/SalesContext'
+import { SaleOrderButton } from './SaleOrderButton'
 
 const CATEGORIAS = ['Almacén', 'Limpieza', 'Higiene', 'Fiambrería', 'Verduleria', 'Categoria1', 'Categoria2', 'Categoria3']
 
@@ -13,12 +12,11 @@ export function Categories() {
         <ItemsScroll>
             {
                 CATEGORIAS.map((cat) => (
-                    <Button
+                    <SaleOrderButton
                         key={cat}
-                        styleButton={[styles.button]}
-                        styleText={[styles.textLabel]}
-                        onPress={() => setItems([...items, {category: cat, price: ''}])}
+                        onPress={() => setItems([...items, { category: cat, price: '' }])}
                         content={cat}
+                        condition={false}
                     />
                 ))
             }
