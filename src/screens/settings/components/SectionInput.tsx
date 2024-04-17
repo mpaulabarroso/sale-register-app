@@ -25,8 +25,8 @@ export function SectionInput() {
             .then((res) => res.json())
             .then((data) => {
                 setItems([...items, data])
+                ref.current?.clear()
             })
-        ref.current?.clear()
     }
 
     return (
