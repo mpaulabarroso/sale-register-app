@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 
-
 export function ItemsScroll({ children }: { children: ReactNode }) {
     return (
         <View style={{ marginVertical: 8 }}>

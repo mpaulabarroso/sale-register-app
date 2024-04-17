@@ -28,7 +28,6 @@ export function SaleMainButton() {
                         },
                     ]
                 )
-
             }}
             text='Confirmar'
         />
