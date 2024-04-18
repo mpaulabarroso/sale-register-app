@@ -12,7 +12,7 @@ export function ItemsList<T>({ items, itemToRender }: ItemsListProps<T>) {
                 data={items}
                 keyExtractor={(_item, index) => index.toString()}
                 renderItem={itemToRender}
-                ListFooterComponent={<View style={{ height: Platform.OS === 'ios' ? 24 : 80 }} ></View>}
+                ListFooterComponent={<View style={{ height: Platform.OS === 'ios' ? 60 : 80 }} ></View>}
             />
         </View>
     )
