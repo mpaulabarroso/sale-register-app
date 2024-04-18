@@ -2,56 +2,26 @@ import { Button } from '@componets/Button'
 import { Separator } from '@componets/Separator'
 import { useContext, useState } from 'react'
 import { Item, SectionContext } from '../context/SectionContext'
-import { Alert, StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 import { theme } from '@utils/theme'
+import { useDeleteItem } from '../hooks/useDeleteItem'
+import { useEditItem } from '../hooks/useEditItem'
 
 export function SectionList() {
     const [edit, setEdit] = useState(false)
-    const { items, setItems, endpoint } = useContext(SectionContext)
+    const { items } = useContext(SectionContext)
+
+    const deleteItem = useDeleteItem()
+
+    const editItem = useEditItem()
+
+    const handleEditItem = (item: Item) => {
+        editItem(item)
+            .then(() => setEdit(false))
+            .catch((error) => alert(error))
+    }
 
     if (!(items && items.length > 0)) return null
-
-    const deleteItem = ({ id, name }: Item) => {
-        Alert.alert(
-            'Eliminar categoria',
-            `Esta seguro que desea elimnar ${name}?`,
-            [
-                {
-                    text: 'Cancel',
-                    onPress: () => {},
-                },
-                {
-                    text: 'OK',
-                    onPress: () => fetch(process.env.EXPO_PUBLIC_API_URL + endpoint + '/' + id, {
-                        method: 'DELETE',
-                        headers: {
-                            Accept: 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                    })
-                        .then((res) => {
-                            if (res.ok) {
-                                setItems((newItems: Item[]) => newItems.filter(item => item.id !== id))
-                            }
-                        })
-                }
-            ])
-
-    }
-
-    const editItem = ({ id, name }: Item) => {
-        fetch(process.env.EXPO_PUBLIC_API_URL + endpoint + '/' + id, {
-            method: 'PUT',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ name })
-        })
-            .then((res) => res.json())
-            .then(() => setEdit(false))
-
-    }
 
     return (
         <>
@@ -61,19 +31,17 @@ export function SectionList() {
                         {
                             !edit
                                 ? <Separator title={item.name} />
-
                                 : <TextInput
                                     style={{}}
                                     placeholder={item.name}
                                     onChangeText={txt => item.name = txt}
-                                // value={item.name}
                                 />
                         }
                         <View style={styles.contRow}>
                             <Button
                                 styleButton={styles.buttonCont}
                                 styleText={styles.buttonText}
-                                onPress={() => edit ? editItem(item) : setEdit(true)}
+                                onPress={() => edit ? handleEditItem(item) : setEdit(true)}
                                 content={edit ? 'Guardar' : 'Editar'}
                             />
                             <Button
@@ -98,11 +66,9 @@ export function SectionList() {
 
 export const styles = StyleSheet.create({
     buttonCont: {
-        height: 30,
         paddingHorizontal: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.colors.bgPrimary,
     },
     buttonText: {
         color: theme.colors.txtPrimary,
