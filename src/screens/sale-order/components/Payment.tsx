@@ -1,7 +1,7 @@
 import { ItemsScroll } from '@componets/ItemsScroll'
 import { useContext } from 'react'
 import { SalesContext } from '../context/SalesContext'
-import { SaleOrderButton } from './SaleOrderButton'
+import { SaleOrderButton } from './sale-oreder-button/SaleOrderButton'
 
 const METODOS = ['Efectivo', 'Tarjeta', 'Tranferencia', 'Billetera', 'Otros']
 

@@ -1,7 +1,7 @@
 import { ItemsScroll } from '@componets/ItemsScroll'
 import { useContext } from 'react'
 import { SalesContext } from '../context/SalesContext'
-import { SaleOrderButton } from './SaleOrderButton'
+import { SaleOrderButton } from './sale-oreder-button/SaleOrderButton'
 
 const CATEGORIAS = ['Almacén', 'Limpieza', 'Higiene', 'Fiambrería', 'Verduleria', 'Categoria1', 'Categoria2', 'Categoria3']
 
