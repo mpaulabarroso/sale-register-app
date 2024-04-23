@@ -1,0 +1,9 @@
+{
+    "roots": [
+        "<rootDir>"
+    ],
+    "transform": {
+        "^.+\\.tsx?$": "babel-jest"
+    },
+    "preset": "jest-expo"
+}
