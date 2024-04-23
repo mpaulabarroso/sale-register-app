@@ -1,8 +1,8 @@
-import { MainButton } from '@componets/MainButton'
+import { MainButton } from '@componets/main-button/MainButton'
 import { useContext } from 'react'
 import { SalesContext } from '../context/SalesContext'
 import { Alert } from 'react-native'
-import { add } from 'services/dataBase'
+import { addSale } from 'services/dataBase'
 
 export function SaleMainButton() {
     const { items, payment, setItems } = useContext(SalesContext)
@@ -22,7 +22,7 @@ export function SaleMainButton() {
                         },
                         {
                             text: 'Confirmar', onPress: () => {
-                                add({ payment, total, items: JSON.stringify(items) })
+                                addSale({ payment, total, items: JSON.stringify(items) })
                                 setItems([])
                             }
                         },
