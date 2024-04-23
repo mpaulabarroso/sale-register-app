@@ -3,7 +3,7 @@ import { SalesContext } from '../context/SalesContext'
 import { Text } from 'react-native'
 import { ItemsList } from '@componets/ItemsList'
 import { ItemToShow } from '@componets/ItemToShow'
-import { PriceInput } from './PriceInput'
+import { PriceInput } from './price-input/PriceInput'
 
 export function SaleItemList() {
     const { items } = useContext(SalesContext)
