@@ -1,10 +1,10 @@
 import { Text, TouchableOpacity, TextStyle, ViewStyle } from 'react-native'
 
 interface ButtonProps {
-    styleButton: ViewStyle[] | ViewStyle
-    styleText: TextStyle[] | TextStyle
+    styleButton?: ViewStyle[] | ViewStyle
+    styleText?: TextStyle[] | TextStyle
     onPress: () => void
-    content: string
+    content: React.ReactNode | string
 }
 
 export const Button = ({ styleButton, styleText, onPress, content }: ButtonProps) => (
