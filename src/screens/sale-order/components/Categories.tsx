@@ -20,7 +20,13 @@ export function Categories() {
         const unsubscribe = navigation.addListener('focus', () => {
             getCatagories(setCategories)
         })
-        return unsubscribe
+        const unsubscribe2 = navigation.addListener('blur', () => {
+            setItems([])
+        })
+        return () => {
+            unsubscribe
+            unsubscribe2
+        }
     }, [navigation])
 
     return (

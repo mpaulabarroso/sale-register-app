@@ -18,13 +18,10 @@ export function Payment() {
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            // Set payments
-            getPayment(setPayments)
-            // Set default payment of list
-            setPayment({
-                current: payments[0]?.name,
-                default: payments[0]?.name
-            })
+            if (!payments.length) {
+                // Set payments
+                getPayment(setPayments)
+            }
         })
         return unsubscribe
     }, [navigation])
@@ -35,9 +32,9 @@ export function Payment() {
                 payments.map(({ name }) => (
                     <SaleOrderButton
                         key={name}
-                        onPress={() => setPayment({ current: name, default: payment.default })}
+                        onPress={() => setPayment(name)}
                         content={name}
-                        condition={name === payment.current}
+                        condition={name === payment}
                     />
                 ))
             }

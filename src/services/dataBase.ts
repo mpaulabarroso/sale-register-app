@@ -76,8 +76,7 @@ export function getPayment(cb: SetPaymentsType) {
         (tx) => {
             tx.executeSql('select name from payment', [], (_, { rows }) => {
                 cb(rows._array)
-            }
-            )
+            })
         },
     )
 }

@@ -9,27 +9,22 @@ export interface Item {
     price: string
 }
 
-export interface PaymentObj {
-    current?: string
-    default?: string
-}
-
 interface typeContext {
-    payment: PaymentObj
-    setPayment: React.Dispatch<React.SetStateAction<PaymentObj>>
+    payment: string
+    setPayment: React.Dispatch<React.SetStateAction<string>>
     items: Item[]
     setItems: React.Dispatch<React.SetStateAction<Item[]>>
 }
 
 export const SalesContext = createContext<typeContext>({
-    payment: {},
+    payment: '',
     setPayment: () => { },
     items: [],
     setItems: () => { }
 })
 
 export const SalesContextProvider = ({ children }: SalesContextProviderProps) => {
-    const [payment, setPayment] = useState<PaymentObj>({})
+    const [payment, setPayment] = useState<string>('')
     const [items, setItems] = useState<Item[]>([])
 
     return (
