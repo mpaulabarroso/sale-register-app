@@ -1,4 +1,3 @@
-
 import { SaleType, SetHistoryType } from '@screens/sales-history/SalesHistory'
 import * as SQLite from 'expo-sqlite'
 import { Platform } from 'react-native'
@@ -25,10 +24,16 @@ export function createDataBase() {
         tx.executeSql(
             'CREATE TABLE IF NOT EXISTS history (payment text, items text, total text);'
         )
+        // tx.executeSql(
+        //     'CREATE TABLE IF NOT EXISTS category (id integer primary key autoincrement, name text);'
+        // )
+        // tx.executeSql(
+        //     'CREATE TABLE IF NOT EXISTS payment (id integer primary key autoincrement, name text);'
+        // )
     })
 }
 
-export function add(sale: SaleType) {
+export function addSale(sale: SaleType) {
     db.transaction(
         (tx) => {
             tx.executeSql('insert into history (payment, items, total) values (?, ?, ?)', [sale.payment, sale.items, sale.total])
@@ -45,3 +50,19 @@ export function getAll(cb: SetHistoryType) {
         },
     )
 }
+
+// export function addCategory(name: any ) {
+//     db.transaction(
+//         (tx) => {
+//             tx.executeSql('insert into category (name) values (?)', [name])
+//         },
+//     )
+// }
+
+// export function addPayment(name: any) {
+//     db.transaction(
+//         (tx) => {
+//             tx.executeSql('insert into payment (name) values (?)', [name])
+//         },
+//     )
+// }

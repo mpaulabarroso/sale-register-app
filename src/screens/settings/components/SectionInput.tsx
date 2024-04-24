@@ -29,6 +29,13 @@ export function SectionInput() {
             })
     }
 
+    // const handleCategory = (item: any) => {
+    //     console.log(item)
+    //     setItems([...items, { name: item.name, id: item.name}])
+    //     ref.current?.clear()
+    //     console.log(items)
+    // }
+
     return (
         <View style={styles.contRow}>
             <TextInput

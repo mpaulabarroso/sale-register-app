@@ -8,8 +8,8 @@ import { useDeleteItem } from '../hooks/useDeleteItem'
 import { useEditItem } from '../hooks/useEditItem'
 
 export function SectionList() {
-    const [edit, setEdit] = useState(false)
     const { items } = useContext(SectionContext)
+    const [edit, setEdit] = useState<string | null>(null)
 
     const deleteItem = useDeleteItem()
 
@@ -17,7 +17,7 @@ export function SectionList() {
 
     const handleEditItem = (item: Item) => {
         editItem(item)
-            .then(() => setEdit(false))
+            .then(() => setEdit(null))
             .catch((error) => alert(error))
     }
 
@@ -29,7 +29,7 @@ export function SectionList() {
                 items.map((item: Item) =>
                     <View style={styles.contRow} key={item.id}>
                         {
-                            !edit
+                            edit !== item.id
                                 ? <Separator title={item.name} />
                                 : <TextInput
                                     style={{}}
@@ -37,18 +37,21 @@ export function SectionList() {
                                     onChangeText={txt => item.name = txt}
                                 />
                         }
-                        <View style={styles.contRow}>
+                        <View
+                            key={item.id}
+                            style={styles.contRow}
+                        >
                             <Button
                                 styleButton={styles.buttonCont}
                                 styleText={styles.buttonText}
-                                onPress={() => edit ? handleEditItem(item) : setEdit(true)}
-                                content={edit ? 'Guardar' : 'Editar'}
+                                onPress={() => edit === item.id ? handleEditItem(item) : setEdit(item.id)}
+                                content={edit === item.id ? 'Guardar' : 'Editar'}
                             />
                             <Button
                                 styleButton={styles.buttonCont}
                                 styleText={styles.buttonText}
-                                onPress={() => edit ? setEdit(false) : deleteItem(item)}
-                                content={edit ? 'Cancelar' : 'Borrar'}
+                                onPress={() => edit === item.id ? setEdit(null) : deleteItem(item)}
+                                content={edit === item.id ? 'Cancelar' : 'Borrar'}
                             />
                         </View>
                     </View>
