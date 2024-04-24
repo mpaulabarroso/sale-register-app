@@ -1,5 +1,4 @@
 import { ContentView } from '@componets/ContentView'
-import { SyncSales } from './components/SyncSales'
 import { Section } from './components/Section'
 
 export function Settings() {
@@ -15,7 +14,6 @@ export function Settings() {
                 placeholder='Nuevo metodo de pago...'
                 endpoint='/payment'
             />
-            <SyncSales />
         </ContentView>
     )
 }

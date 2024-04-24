@@ -5,7 +5,7 @@ import { Alert } from 'react-native'
 import { addSale } from 'services/dataBase'
 
 export function SaleMainButton() {
-    const { items, payment, setItems } = useContext(SalesContext)
+    const { items, payment, setItems, setPayment } = useContext(SalesContext)
 
     return (
         <MainButton
@@ -22,8 +22,9 @@ export function SaleMainButton() {
                         },
                         {
                             text: 'Confirmar', onPress: () => {
-                                addSale({ payment, total, items: JSON.stringify(items) })
+                                addSale({ payment: payment.current, total, items: JSON.stringify(items) })
                                 setItems([])
+                                setPayment(payment.default)
                             }
                         },
                     ]

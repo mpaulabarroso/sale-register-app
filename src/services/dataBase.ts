@@ -1,3 +1,5 @@
+import { SetCategoryType } from '@screens/sale-order/components/Categories'
+import { SetPaymentsType } from '@screens/sale-order/components/Payment'
 import { SaleType, SetHistoryType } from '@screens/sales-history/SalesHistory'
 import * as SQLite from 'expo-sqlite'
 import { Platform } from 'react-native'
@@ -24,12 +26,12 @@ export function createDataBase() {
         tx.executeSql(
             'CREATE TABLE IF NOT EXISTS history (payment text, items text, total text);'
         )
-        // tx.executeSql(
-        //     'CREATE TABLE IF NOT EXISTS category (id integer primary key autoincrement, name text);'
-        // )
-        // tx.executeSql(
-        //     'CREATE TABLE IF NOT EXISTS payment (id integer primary key autoincrement, name text);'
-        // )
+        tx.executeSql(
+            'CREATE TABLE IF NOT EXISTS category (name text);'
+        )
+        tx.executeSql(
+            'CREATE TABLE IF NOT EXISTS payment (name text);'
+        )
     })
 }
 
@@ -51,18 +53,47 @@ export function getAll(cb: SetHistoryType) {
     )
 }
 
-// export function addCategory(name: any ) {
-//     db.transaction(
-//         (tx) => {
-//             tx.executeSql('insert into category (name) values (?)', [name])
-//         },
-//     )
-// }
+export function dropItems(table: string) {
+    db.transaction(
+        (tx) => {
+            tx.executeSql(`delete from ${table}`)
+        },
+    )
+}
 
-// export function addPayment(name: any) {
-//     db.transaction(
-//         (tx) => {
-//             tx.executeSql('insert into payment (name) values (?)', [name])
-//         },
-//     )
-// }
+export function getCatagories(cb: SetCategoryType) {
+    db.transaction(
+        (tx) => {
+            tx.executeSql('select name from category', [], (_, { rows }) =>
+                cb(rows._array)
+            )
+        },
+    )
+}
+
+export function getPayment(cb: SetPaymentsType) {
+    db.transaction(
+        (tx) => {
+            tx.executeSql('select name from payment', [], (_, { rows }) => {
+                cb(rows._array)
+            }
+            )
+        },
+    )
+}
+
+export function addCategory(name: string) {
+    db.transaction(
+        (tx) => {
+            tx.executeSql('insert into category (name) values (?)', [name])
+        },
+    )
+}
+
+export function addPayment(name: string) {
+    db.transaction(
+        (tx) => {
+            tx.executeSql('insert into payment (name) values (?)', [name])
+        },
+    )
+}

@@ -1,21 +1,36 @@
 import { ItemsScroll } from '@componets/ItemsScroll'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { SalesContext } from '../context/SalesContext'
 import { SaleOrderButton } from './sale-oreder-button/SaleOrderButton'
+import { useNavigation } from '@react-navigation/native'
+import { getCatagories } from 'services/dataBase'
 
-const CATEGORIAS = ['Almacén', 'Limpieza', 'Higiene', 'Fiambrería', 'Verduleria', 'Categoria1', 'Categoria2', 'Categoria3']
+interface CategoryLabel {
+    name: string
+}
+
+export type SetCategoryType = React.Dispatch<React.SetStateAction<CategoryLabel[]>>
 
 export function Categories() {
     const { items, setItems } = useContext(SalesContext)
+    const navigation = useNavigation()
+    const [categories, setCategories] = useState<CategoryLabel[]>([])
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            getCatagories(setCategories)
+        })
+        return unsubscribe
+    }, [navigation])
 
     return (
         <ItemsScroll>
             {
-                CATEGORIAS.map((cat) => (
+                categories.map(({ name }) => (
                     <SaleOrderButton
-                        key={cat}
-                        onPress={() => setItems([...items, { category: cat, price: '' }])}
-                        content={cat}
+                        key={name}
+                        onPress={() => setItems([...items, { category: name, price: '' }])}
+                        content={name}
                         condition={false}
                     />
                 ))

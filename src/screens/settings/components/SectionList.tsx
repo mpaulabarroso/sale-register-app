@@ -6,14 +6,14 @@ import { StyleSheet, TextInput, View } from 'react-native'
 import { theme } from '@utils/theme'
 import { useDeleteItem } from '../hooks/useDeleteItem'
 import { useEditItem } from '../hooks/useEditItem'
+import { useGetSync } from '../hooks/useGetSync'
 
 export function SectionList() {
     const { items } = useContext(SectionContext)
     const [edit, setEdit] = useState<string | null>(null)
-
     const deleteItem = useDeleteItem()
-
     const editItem = useEditItem()
+    const sync = useGetSync()
 
     const handleEditItem = (item: Item) => {
         editItem(item)
@@ -60,7 +60,7 @@ export function SectionList() {
             <Button
                 styleButton={styles.buttonCont}
                 styleText={styles.buttonText}
-                onPress={() => { }}
+                onPress={sync}
                 content='Sincronizar'
             />
         </>
