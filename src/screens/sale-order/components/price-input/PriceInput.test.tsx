@@ -5,8 +5,9 @@ import { PriceInput } from './PriceInput'
 
 describe('price input', () => {
     const mockItem = {
-        category: 'Verduleria',
-        price: ''
+        name: 'Verduleria',
+        id: '',
+        ammount: ''
     }
 
     //renderiza correctamente
@@ -24,7 +25,7 @@ describe('price input', () => {
 
         fireEvent.changeText(inputField, '234')
 
-        expect(mockItem.price).toBe('234')
+        expect(mockItem.ammount).toBe('234')
 
     })
 })

@@ -1,11 +1,13 @@
 import { useContext } from 'react'
 import { SectionContext } from '../context/SectionContext'
-import { addCategory, addPayment, dropItems } from 'services/dataBase'
 import { useNavigation, ParamListBase, NavigationProp } from '@react-navigation/native'
+import { addCategory } from 'services/addCategory'
+import { dropTables } from 'services/dropTables'
+import { addPayment } from 'services/addPayment'
 
 interface Add {
     [key: string]: {
-        add: (name: string) => void,
+        add: (name: string, id: string) => Promise<unknown>,
         table: string
     }
 }
@@ -19,14 +21,20 @@ export function useGetSync() {
     const { endpoint, items } = useContext(SectionContext)
     const navigation: NavigationProp<ParamListBase> = useNavigation()
 
-    const sync = () => {
-        // First delete items saved in sqlite db
-        dropItems(OBJ_ADD[endpoint].table)
-        // Sync items - saved new items
-        items.forEach(item => {
-            OBJ_ADD[endpoint].add(item.name)
-        })
-        navigation.navigate('SaleOrder')
+    const sync = async () => {
+        try {
+            // First delete items saved in sqlite db
+            await dropTables(OBJ_ADD[endpoint].table)
+            // Sync items - saved new items
+            const arrayPromise = items.map(item => {
+                return OBJ_ADD[endpoint].add(item.name, String(item.id))
+            })
+            await Promise.all(arrayPromise)
+            navigation.navigate('SaleOrder')
+        } catch (err) {
+            console.log(err) // eslint-disable-line no-console
+        }
+
     }
     return sync
 }

@@ -9,7 +9,7 @@ export function PriceInput({ item }: { item: Item }) {
             <TextInput
                 style={styles.input}
                 keyboardType={'numeric'}
-                onChangeText={(txt) => item.price = txt}
+                onChangeText={(txt) => item.ammount = txt}
                 placeholder='111.11'
             />
         </View>

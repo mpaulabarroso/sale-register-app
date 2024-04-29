@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 
 export interface Item {
-    id: string
+    id: number
     name: string
 }
 

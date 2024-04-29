@@ -13,7 +13,7 @@ export function SaleItemList() {
             items={items}
             itemToRender={({ item }) => (
                 <ItemToShow>
-                    <Text style={{ fontSize: 16 }}>{item.category}</Text>
+                    <Text style={{ fontSize: 16 }}>{item.name}</Text>
                     <PriceInput item={item} />
                 </ItemToShow>
             )}

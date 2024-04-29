@@ -1,13 +1,9 @@
 import { ItemsScroll } from '@componets/ItemsScroll'
 import { useContext, useEffect, useState } from 'react'
-import { SalesContext } from '../context/SalesContext'
+import { PaymentLabel, SalesContext } from '../context/SalesContext'
 import { SaleOrderButton } from './sale-oreder-button/SaleOrderButton'
 import { useNavigation } from '@react-navigation/native'
-import { getPayment } from 'services/dataBase'
-
-interface PaymentLabel {
-    name: string
-}
+import { getPayments } from 'services/getPayments'
 
 export type SetPaymentsType = React.Dispatch<React.SetStateAction<PaymentLabel[]>>
 
@@ -20,7 +16,9 @@ export function Payment() {
         const unsubscribe = navigation.addListener('focus', () => {
             if (!payments.length) {
                 // Set payments
-                getPayment(setPayments)
+                getPayments()
+                    .then((ps) => setPayments(ps))
+                    .catch((error: Error) => console.log(error)) // eslint-disable-line no-console
             }
         })
         return unsubscribe
@@ -29,12 +27,12 @@ export function Payment() {
     return (
         <ItemsScroll>
             {
-                payments.map(({ name }) => (
+                payments.map(({ id, name }) => (
                     <SaleOrderButton
-                        key={name}
-                        onPress={() => setPayment(name)}
+                        key={id}
+                        onPress={() => setPayment({ id, name })}
                         content={name}
-                        condition={name === payment}
+                        condition={name === payment.name}
                     />
                 ))
             }

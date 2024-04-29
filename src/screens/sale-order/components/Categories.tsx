@@ -3,10 +3,11 @@ import { useContext, useEffect, useState } from 'react'
 import { SalesContext } from '../context/SalesContext'
 import { SaleOrderButton } from './sale-oreder-button/SaleOrderButton'
 import { useNavigation } from '@react-navigation/native'
-import { getCatagories } from 'services/dataBase'
+import { getCatagories } from 'services/getCategories'
 
-interface CategoryLabel {
+export interface CategoryLabel {
     name: string
+    id: string
 }
 
 export type SetCategoryType = React.Dispatch<React.SetStateAction<CategoryLabel[]>>
@@ -18,11 +19,16 @@ export function Categories() {
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            getCatagories(setCategories)
+            if (!categories.length) {
+                getCatagories()
+                    .then((cs) => setCategories(cs))
+                    .catch((error: Error) => console.log(error)) // eslint-disable-line no-console
+            }
         })
         const unsubscribe2 = navigation.addListener('blur', () => {
             setItems([])
         })
+
         return () => {
             unsubscribe
             unsubscribe2
@@ -32,10 +38,10 @@ export function Categories() {
     return (
         <ItemsScroll>
             {
-                categories.map(({ name }) => (
+                categories.map(({ name, id }) => (
                     <SaleOrderButton
-                        key={name}
-                        onPress={() => setItems([...items, { category: name, price: '' }])}
+                        key={id}
+                        onPress={() => setItems([...items, { id, ammount: '', name }])}
                         content={name}
                         condition={false}
                     />
