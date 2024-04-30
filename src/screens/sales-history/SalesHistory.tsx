@@ -9,14 +9,8 @@ import { getRenderHistory } from 'services/getSales'
 import { HistoryMainButton } from './components/HistoryMainButton'
 import { Icon } from '@componets/Icon'
 import { ActivityIndicator, View } from 'react-native'
-
-export interface SaleLabel {
-    paymentName: string
-    total: string
-    isSync: number
-}
-
-export type SetHistoryType = React.Dispatch<React.SetStateAction<SaleLabel[]>>
+import { SaleLabel } from './types'
+import { HistoryDeleteButton } from './components/HistoryDeleteButton'
 
 export function SalesHistory() {
     const [history, setHistory] = useState<SaleLabel[]>([])
@@ -42,8 +36,11 @@ export function SalesHistory() {
 
     return (
         <ContentView>
-            <Separator title={DATE} />
-            <View style={{flex: 1}}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Separator title={DATE} />
+                <HistoryDeleteButton isLoading={isLoading} setIsLoading={setIsLoading} />
+            </View>
+            <View style={{ flex: 1 }}>
                 {isLoading && <ActivityIndicator />}
                 {!isLoading && <ItemsList
                     items={history}

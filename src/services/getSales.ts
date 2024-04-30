@@ -1,6 +1,6 @@
 import * as SQLite from 'expo-sqlite'
 import { db } from './dataBase'
-import { SaleLabel } from '@screens/sales-history/SalesHistory'
+import { SaleLabel } from '@screens/sales-history/types'
 
 function getSales<T>(query: string) {
     return function (): Promise<T[]> {

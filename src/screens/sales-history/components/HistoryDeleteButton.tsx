@@ -1,22 +1,23 @@
-import { MainButton } from '@componets/main-button/MainButton'
-import { Alert } from 'react-native'
-import { useGetSyncHistory } from '../hooks/useGetSyncHistory'
+import { Icon } from '@componets/Icon'
+import { useDeleteHistory } from '../hooks/useDeleteHistory'
+import { Button } from '@componets/Button'
 import { HistoryButtonsProps } from '../types'
+import { Alert } from 'react-native'
 
-export function HistoryMainButton({ isLoading, setIsLoading }: HistoryButtonsProps) {
-    const syncHistory = useGetSyncHistory()
+export function HistoryDeleteButton({ isLoading, setIsLoading }: HistoryButtonsProps) {
+    const deleteHistory = useDeleteHistory()
 
-    const handleSync = () => {
+    const handleDelete = () => {
         Alert.alert(
-            'Iniciar',
-            'Sincronizar el historial.',
+            'Confirmar',
+            'Borrar el historial.',
             [
                 { text: 'Cancelar', style: 'cancel' },
                 {
                     text: 'Confirmar', onPress: async () => {
                         try {
                             setIsLoading(true)
-                            await syncHistory()
+                            deleteHistory()
                         } catch (err) {
                             // eslint-disable-next-line no-console
                             console.log(err)
@@ -30,10 +31,9 @@ export function HistoryMainButton({ isLoading, setIsLoading }: HistoryButtonsPro
     }
 
     return (
-        <MainButton
-            isValid={!isLoading}
-            onPress={!isLoading ? handleSync : () => { }}
-            text='Sincronizar'
+        <Button
+            content={<Icon name="delete" />}
+            onPress={isLoading ? () => { } : handleDelete}
         />
     )
 }

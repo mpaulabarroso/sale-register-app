@@ -9,10 +9,11 @@ const OBJ_NAME: IconNames = {
     arrowUp: 'arrow-drop-up',
     check: 'check-circle-outline',
     sync: 'sync',
+    delete: 'delete',
 }
 
 interface IconProps {
-    name: 'arrowDown' | 'arrowUp' | 'sync' | 'check'
+    name: 'arrowDown' | 'arrowUp' | 'sync' | 'check' | 'delete'
 }
 
 export function Icon({ name }: IconProps) {
