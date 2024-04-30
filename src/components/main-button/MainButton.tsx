@@ -4,7 +4,7 @@ import { styles } from './MainButton.styles'
 interface MainButtonProps {
     isValid: boolean
     onPress: () => void
-    text: string
+    text: string | React.ReactNode
 }
 
 export function MainButton({ isValid, onPress, text }: MainButtonProps) {

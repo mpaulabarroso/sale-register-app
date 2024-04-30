@@ -7,10 +7,12 @@ interface IconNames {
 const OBJ_NAME: IconNames = {
     arrowDown: 'arrow-drop-down',
     arrowUp: 'arrow-drop-up',
+    check: 'check-circle-outline',
+    sync: 'sync',
 }
 
 interface IconProps {
-    name: 'arrowDown' | 'arrowUp'
+    name: 'arrowDown' | 'arrowUp' | 'sync' | 'check'
 }
 
 export function Icon({ name }: IconProps) {
