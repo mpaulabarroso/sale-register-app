@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from 'react-native'
 
-export function HistoryItemText({ txt }: { txt: string }) {
+export function ItemText({ txt }: { txt: string }) {
     return (
         <Text style={styles.textStyles}>{txt}</Text>
     )

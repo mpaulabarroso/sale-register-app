@@ -3,7 +3,7 @@ import { ContentView } from '@componets/ContentView'
 import { Separator } from '@componets/Separator'
 import { ItemsList } from '@componets/ItemsList'
 import { ItemToShow } from '@componets/ItemToShow'
-import { HistoryItemText } from './components/HistoryItemText'
+import { ItemText } from '../../components/ItemText'
 import { useNavigation } from '@react-navigation/native'
 import { getRenderHistory } from 'services/getSales'
 import { HistoryMainButton } from './components/HistoryMainButton'
@@ -42,16 +42,18 @@ export function SalesHistory() {
             </View>
             <View style={{ flex: 1 }}>
                 {isLoading && <ActivityIndicator />}
-                {!isLoading && <ItemsList
-                    items={history}
-                    itemToRender={({ item }) => (
-                        <ItemToShow>
-                            <HistoryItemText txt={item.paymentName} />
-                            <HistoryItemText txt={item.total} />
-                            <Icon name={item.isSync ? 'check' : 'sync'} />
-                        </ItemToShow>
-                    )}
-                />}
+                {!isLoading &&
+                    <ItemsList
+                        items={history}
+                        itemToRender={({ item }) => (
+                            <ItemToShow>
+                                <ItemText txt={item.paymentName} />
+                                <ItemText txt={item.total} />
+                                <Icon name={item.isSync ? 'check' : 'sync'} />
+                            </ItemToShow>
+                        )}
+                    />
+                }
             </View>
             <HistoryMainButton isLoading={isLoading} setIsLoading={setIsLoading} />
         </ContentView>

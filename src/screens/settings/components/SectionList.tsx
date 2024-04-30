@@ -10,7 +10,7 @@ import { useGetSync } from '../hooks/useGetSync'
 
 export function SectionList() {
     const { items } = useContext(SectionContext)
-    const [edit, setEdit] = useState<string | null>(null)
+    const [edit, setEdit] = useState<number | null>(null)
     const deleteItem = useDeleteItem()
     const editItem = useEditItem()
     const sync = useGetSync()
